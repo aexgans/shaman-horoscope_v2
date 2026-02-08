@@ -1,14 +1,140 @@
 // calculationService.js - исправленная версия с правильной логикой периодов
 import yearData from '../data/yearData.json'
 import yearPatterns from '../data/yearPatterns.json'
+import descriptions from '../data/descriptions.json'
 
 class CalculationService {
   constructor() {
     this.years = yearData.years
     this.patterns = yearPatterns
     this.yearCache = new Map()
+    this.descriptions = descriptions
+    this.historyKey = 'shaman-horoscope-history'
+    this.maxHistoryItems = 10
+  }
+// ==================== ИСТОРИЯ РАСЧЕТОВ ====================
+
+  saveToHistory(result) {
+    try {
+      const history = this.getHistory()
+      
+      // Убираем дубликаты по дате
+      const filteredHistory = history.filter(item => item.birthDate !== result.birthDate)
+      
+      // Добавляем новый результат в начало
+      const historyItem = {
+        id: Date.now(),
+        birthDate: result.birthDate,
+        formattedDate: result.formattedDate,
+        animal: result.animal,
+        character: result.character,
+        element: result.element,
+        mengi: result.mengi,
+        period: result.period,
+        year: result.year,
+        timestamp: new Date().toISOString()
+      }
+      
+      filteredHistory.unshift(historyItem)
+      
+      // Ограничиваем количество записей
+      const limitedHistory = filteredHistory.slice(0, this.maxHistoryItems)
+      
+      localStorage.setItem(this.historyKey, JSON.stringify(limitedHistory))
+      return true
+    } catch (error) {
+      console.error('Ошибка сохранения истории:', error)
+      return false
+    }
   }
 
+  getHistory() {
+    try {
+      const historyStr = localStorage.getItem(this.historyKey)
+      return historyStr ? JSON.parse(historyStr) : []
+    } catch (error) {
+      console.error('Ошибка чтения истории:', error)
+      return []
+    }
+  }
+
+  clearHistory() {
+    localStorage.removeItem(this.historyKey)
+  }
+
+  removeFromHistory(id) {
+    const history = this.getHistory()
+    const filtered = history.filter(item => item.id !== id)
+    localStorage.setItem(this.historyKey, JSON.stringify(filtered))
+    return filtered
+  }
+
+  // ==================== ПОЛУЧЕНИЕ ОПИСАНИЙ ====================
+
+  getAnimalDescription(animal) {
+    return this.descriptions.animals[animal] || {
+      title: animal,
+      description: 'Описание отсутствует',
+      symbolism: 'Неизвестно',
+      element: 'Неизвестно',
+      direction: 'Неизвестно'
+    }
+  }
+
+  getCharacterDescription(character) {
+    return this.descriptions.characters[character] || {
+      title: character,
+      description: 'Описание отсутствует',
+      energy: 'Неизвестно',
+      quality: 'Неизвестно'
+    }
+  }
+
+  getElementDescription(element) {
+    const elementLower = element.toLowerCase()
+    return this.descriptions.elements[elementLower] || {
+      title: element,
+      description: 'Описание отсутствует',
+      season: 'Неизвестно',
+      color: 'Неизвестно',
+      direction: 'Неизвестно'
+    }
+  }
+
+  getMengiDescription(mengi) {
+    const mengiLower = mengi.toLowerCase()
+    return this.descriptions.mengi[mengiLower] || {
+      title: mengi,
+      description: 'Описание отсутствует',
+      quality: 'Неизвестно'
+    }
+  }
+
+  // ==================== ТЕКУЩИЙ ГОД ====================
+
+  getCurrentYearInfo() {
+    const now = new Date()
+    
+    try {
+      const yearInfo = this.calculateAll(now.toISOString().split('T')[0])
+      
+      const endDate = new Date(yearInfo.yearEndDate)
+    
+      
+      return {
+        animal: yearInfo.animal,
+        character: yearInfo.character,
+        element: yearInfo.element,
+        mengi: yearInfo.mengi,
+        year: yearInfo.year,
+        endDate: yearInfo.yearEndDateFormatted,
+        daysLeft:Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)) 
+      }
+    } catch (error) {
+      console.error('Ошибка получения информации о текущем годе:', error)
+      return null
+    }
+  }
   // ==================== ОСНОВНОЙ МЕТОД ====================
 
   calculateAll(birthDateStr) {
@@ -27,12 +153,15 @@ class CalculationService {
       
       // 3. Определяем период (исправленная логика!)
       const periodInfo = this.findPeriod(birthDate, yearInfo.year)
+
+      // 4. Рассчитываем хранителя
+      const guardianInfo = this.calculateGuardian(birthDateStr, yearCharacteristics.mengi)
       
-      // 4. Проверяем пик и наложение
-      const isPeak = this.isPeak(periodInfo.dayInPeriod)
+      // 5. Проверяем пик и наложение
+      const isPeak = this.isPeak(periodInfo.dayInPeriod, periodInfo.duration)
       const isOverlap = this.isOverlap(periodInfo.dayInPeriod, periodInfo.duration)
       
-      // 5. Форматируем результат
+      // 6. Форматируем результат
       return {
         // Основные данные
         birthDate: birthDateStr,
@@ -41,7 +170,9 @@ class CalculationService {
         // Информация о годе
         year: yearInfo.year,
         yearStartDate: yearInfo.startDate,
+        yearEndDate: yearInfo.endDate,
         yearStartDateFormatted: this.formatDateDDMMYYYY(new Date(yearInfo.startDate + 'T00:00:00')),
+        yearEndDateFormatted: this.formatDateDDMMYYYY(new Date(yearInfo.endDate + 'T00:00:00')),
         yearDay: this.calculateYearDay(birthDate, yearInfo.startDate),
         
         // Характеристики года
@@ -50,6 +181,9 @@ class CalculationService {
         element: yearCharacteristics.element,
         mengi: yearCharacteristics.mengi,
         
+        // Хранитель
+        guardian: guardianInfo.name,
+
         // Информация о периоде
         period: periodInfo.name,
         periodDay: periodInfo.dayInPeriod,
@@ -79,6 +213,109 @@ class CalculationService {
       console.error('Ошибка расчета:', error)
       throw error
     }
+  }
+   // ==================== РАСЧЕТ ХРАНИТЕЛЯ ====================
+
+  calculateGuardian(birthDateStr, mengi) {
+    // Убираем точки из даты для расчета
+    const cleanDate = birthDateStr.replace(/\./g, '')
+    
+    // Сумма всех цифр даты
+    const dateSum = this.sumDigits(cleanDate)
+    
+    // Сумма цифр полученного числа
+    const finalSum = this.sumDigits(dateSum.toString())
+    
+    // Определяем хранителя по менги
+    const guardian = this.getGuardianByMengi(mengi, finalSum)
+    
+    return guardian
+  }
+
+  sumDigits(str) {
+    return str.split('').reduce((sum, char) => {
+      const num = parseInt(char)
+      return isNaN(num) ? sum : sum + num
+    }, 0)
+  }
+
+  getGuardianByMengi(mengi, starNumber) {
+    const mengiLower = mengi.toLowerCase()
+    
+    // Маппинг менги на хранителей
+    const guardians = {
+      '9 красных': {
+        name: 'Твой хранитель: Дух Гор - Таг-Ээзи'
+      },
+      '3 синих': {
+        name: 'Твой хранитель: Дух Воды - Суг-Ээзи'
+      },
+      '4 зеленых': {
+        name: 'Твой хранитель: Дух леса - Тайга-Ээзи'
+      },
+      '5 желтых': {
+        name: 'Твой хранитель с ' + this.getCasssiopeiaStarNumber(starNumber) + ' звезды созвездия Кассиопея'
+      },
+      '7 красных': {
+        name: 'Твой хранитель с ' + this.getUrsaMajorStarNumber(starNumber) + ' звезды созвездия Большая Медведица'
+      },
+      '8 белых': {
+        name: 'Твой хранитель: Светлая душа с Белых Небес'
+      },
+      '6 белых': {
+        name: 'Твой хранитель: Светлая душа с Белых Небес'
+      },
+      '1 белых': {
+        name: 'Твой хранитель: Светлая душа с Белых Небес'
+      },
+      '2 черных': {
+        name: 'Твой хранитель: Тенгери с Черных Небес'
+      }
+    }
+    
+    // Находим хранителя (регистронезависимо)
+    for (const [key, value] of Object.entries(guardians)) {
+      if (mengiLower.includes(key.toLowerCase())) {
+        return {
+          name: value.name,
+          description: value.description,
+          constellation: value.constellation,
+          star: value.star,
+          fullName: `${value.name} - ${value.description}`
+        }
+      }
+    }
+    
+    // Если не нашли, возвращаем дефолтного
+    return {
+      name: 'Дух Предков'
+    }
+  }
+
+  getCasssiopeiaStarNumber(starNumber) {
+    // Для Кассиопеи: 1 и 6 → 1, 2 и 7 → 2, 3 и 8 → 3, 4 и 9 → 4, 5 → 5
+    const mapping = {
+      1: 1, 6: 1,
+      2: 2, 7: 2,
+      3: 3, 8: 3,
+      4: 4, 9: 4,
+      5: 5
+    }
+    return mapping[starNumber] || 1
+  }
+
+  getUrsaMajorStarNumber(starNumber) {
+    // Для Большой Медведицы: 1 и 8 → 1, 2 и 9 → 2, 3 → 3, 4 → 4, 5 → 5, 6 → 6, 7 → 7
+    const mapping = {
+      1: 1, 8: 1,
+      2: 2, 9: 2,
+      3: 3,
+      4: 4,
+      5: 5,
+      6: 6,
+      7: 7
+    }
+    return mapping[starNumber] || 1
   }
 
   // ==================== ФОРМАТИРОВАНИЕ ДАТ ====================
@@ -296,100 +533,10 @@ class CalculationService {
     }
   }
 
-  /**
-   * Упрощенная версия поиска периода (альтернативный подход)
-   */
-  findPeriodSimple(date) {
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1 // 1-12
-    const day = date.getDate()
-    
-    // Преобразуем дату в день года (с 1 января)
-    const dateObj = new Date(year, month - 1, day)
-    const startOfYear = new Date(year, 0, 1)
-    const dayOfYear = Math.floor((dateObj - startOfYear) / (1000 * 60 * 60 * 24)) + 1
-    
-    console.log(`День года для ${day}.${month}.${year}: ${dayOfYear}`)
-    
-    // Проходим по всем периодам
-    for (let i = 0; i < this.patterns.periods.length; i++) {
-      const period = this.patterns.periods[i]
-      
-      // Рассчитываем дни начала и конца периода
-      const periodStartDay = this.calculateDayOfYear(period.startMonth, period.startDay, year)
-      let periodEndDay = this.calculateDayOfYear(period.endMonth, period.endDay, year)
-      
-      // Для периодов с переходом через год
-      if (period.crossYear && periodEndDay < periodStartDay) {
-        periodEndDay += 365 + (this.isLeapYear(year) ? 1 : 0)
-      }
-      
-      console.log(`Период ${period.name}: дни ${periodStartDay}-${periodEndDay}`)
-      
-      // Проверяем, попадает ли день года в период
-      let adjustedDayOfYear = dayOfYear
-      if (period.crossYear && dayOfYear < periodStartDay) {
-        adjustedDayOfYear += 365 + (this.isLeapYear(year) ? 1 : 0)
-      }
-      
-      if (adjustedDayOfYear >= periodStartDay && adjustedDayOfYear <= periodEndDay) {
-        const dayInPeriod = adjustedDayOfYear - periodStartDay + 1
-        
-        // Рассчитываем реальные даты
-        const startDate = this.dateFromDayOfYear(periodStartDay, year)
-        let endDate = this.dateFromDayOfYear(periodEndDay, year)
-        
-        // Если периодEndDay больше 365/366, значит это следующий год
-        if (periodEndDay > (365 + (this.isLeapYear(year) ? 1 : 0))) {
-          endDate = this.dateFromDayOfYear(periodEndDay - (365 + (this.isLeapYear(year) ? 1 : 0)), year + 1)
-        }
-        
-        console.log(`✅ Найден период: ${period.name}`)
-        
-        return {
-          name: period.name,
-          dayInPeriod,
-          duration: period.duration,
-          startDate: startDate,
-          endDate: endDate,
-          startDateStr: startDate.toISOString().split('T')[0],
-          endDateStr: endDate.toISOString().split('T')[0],
-          index: i
-        }
-      }
-    }
-    
-    throw new Error(`Не удалось определить период для даты ${date.toISOString().split('T')[0]}`)
-  }
 
-  /**
-   * Рассчитывает день года (1-365/366) для указанных месяца и дня
-   */
-  calculateDayOfYear(month, day, year) {
-    const date = new Date(year, month - 1, day)
-    const startOfYear = new Date(year, 0, 1)
-    return Math.floor((date - startOfYear) / (1000 * 60 * 60 * 24)) + 1
-  }
-
-  /**
-   * Преобразует день года в дату
-   */
-  dateFromDayOfYear(dayOfYear, year) {
-    const date = new Date(year, 0, 1) // 1 января
-    date.setDate(dayOfYear)
-    return date
-  }
-
-  /**
-   * Проверяет високосный год
-   */
-  isLeapYear(year) {
-    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)
-  }
-
-  isPeak(dayInPeriod) {
-    const [start, end] = this.patterns.rules.peakDays
-    return dayInPeriod >= start && dayInPeriod <= end
+  isPeak(dayInPeriod, periodDuration) {
+    const middle= Math.trunc((periodDuration + 1)/2 )
+    return dayInPeriod >= (middle - 3) && dayInPeriod <= (middle + 3)
   }
 
   isOverlap(dayInPeriod, periodDuration) {
@@ -426,55 +573,6 @@ class CalculationService {
     return Math.floor(diffMs / (1000 * 60 * 60 * 24))
   }
 
-  // ==================== ДОПОЛНИТЕЛЬНЫЕ МЕТОДЫ ====================
-
-  getYearByNumber(year) {
-    const yearData = this.years.find(y => y.year === year)
-    if (!yearData) return null
-    
-    return {
-      ...yearData,
-      animal: this.patterns.animals[yearData.animalIndex],
-      character: this.patterns.characters[yearData.characterIndex],
-      element: this.patterns.elements[yearData.elementIndex],
-      mengi: this.patterns.mengi[yearData.mengiIndex],
-      startDateFormatted: this.formatDateDDMMYYYY(new Date(yearData.startDate + 'T00:00:00'))
-    }
-  }
-
-  getPeriodsForYear(targetYear) {
-    return this.patterns.periods.map((period, index) => {
-      let startDate, endDate
-      
-      if (!period.crossYear) {
-        startDate = new Date(targetYear, period.startMonth - 1, period.startDay)
-        endDate = new Date(targetYear, period.endMonth - 1, period.endDay)
-      } else {
-        // Для периода с переходом через год
-        startDate = new Date(targetYear, period.startMonth - 1, period.startDay)
-        endDate = new Date(targetYear + 1, period.endMonth - 1, period.endDay)
-      }
-      
-      return {
-        name: period.name,
-        startDate: startDate.toISOString().split('T')[0],
-        endDate: endDate.toISOString().split('T')[0],
-        startDateFormatted: this.formatDateDDMMYYYY(startDate),
-        endDateFormatted: this.formatDateDDMMYYYY(endDate),
-        duration: period.duration,
-        index: index
-      }
-    })
-  }
-
-  getStats() {
-    return {
-      totalYears: this.years.length,
-      minYear: this.years[0]?.year || 0,
-      maxYear: this.years[this.years.length - 1]?.year || 0,
-      totalPeriods: this.patterns.periods.length
-    }
-  }
 }
 
 export const calculationService = new CalculationService()

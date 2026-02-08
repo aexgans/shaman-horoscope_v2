@@ -16,12 +16,31 @@
           <h1 class="title">Шаманский Гороскоп</h1>
         </div>
         <p class="subtitle">Древняя мудрость животных, стихий и луны</p>
+        
+        <!-- Информация о текущем годе -->
+        <div class="current-year-info" v-if="currentYearInfo">
+          <div class="current-year-card">
+            <div class="current-year-title">
+              Текущий год
+            </div>
+            <div class="current-year-details">
+              <span class="current-year-item">{{ currentYearInfo.animal }}</span>
+              <span class="current-year-item">{{ currentYearInfo.element }}</span>
+              <span class="current-year-item">{{ currentYearInfo.character }}</span>
+              <span class="current-year-item">{{ currentYearInfo.mengi }}</span>
+            </div>
+            <div class="current-year-end">
+              <span class="days-left">Продлится до {{ currentYearInfo.endDate }} (осталось {{ currentYearInfo.daysLeft }} дней)</span>
+            </div>
+          </div>
+        </div>
+
         <div class="header-decoration">
-          <span class="decoration">🌿</span>
+          <span class="decoration">🌳</span>
           <span class="decoration">🔥</span>
           <span class="decoration">💧</span>
-          <span class="decoration">🌍</span>
-          <span class="decoration">🌬️</span>
+          <span class="decoration">⛰️</span>
+          <span class="decoration">⚙️</span>
         </div>
       </div>
     </header>
@@ -60,21 +79,48 @@
               <span class="button-arrow">→</span>
             </button>
             
-            <!-- Быстрый выбор -->
-            <div class="quick-choices">
-              <div class="quick-label">
-                <span class="quick-icon">⚡</span>
-                Быстрый выбор
-              </div>
-              <div class="quick-buttons">
+            <!-- История запросов -->
+            <div class="history-section" v-if="history.length > 0">
+              <div class="history-header">
+                <span class="history-icon">📜</span>
+                <h3 class="history-title">История запросов</h3>
                 <button 
-                  v-for="example in testExamples"
-                  :key="example.date"
-                  @click="runExample(example.date)"
-                  class="quick-choice"
+                  @click="clearHistory" 
+                  class="clear-history-btn" 
+                  title="Очистить историю"
                 >
-                  {{ example.label }}
+                  🗑️
                 </button>
+              </div>
+              
+              <div class="history-items">
+                <div 
+                  v-for="item in history" 
+                  :key="item.id"
+                  class="history-item"
+                  @click="loadFromHistory(item.birthDate)"
+                >
+                  <div class="history-date">{{ item.formattedDate }}</div>
+                  <div class="history-details">
+                    <span class="history-animal">{{ item.animal }}</span>
+                    <span class="history-period">{{ item.period }}</span>
+                  </div>
+                  <button 
+                    @click.stop="removeFromHistory(item.id)"
+                    class="history-remove"
+                    title="Удалить"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Сообщение если история пуста -->
+            <div v-else class="empty-history">
+              <div class="empty-history-content">
+                <span class="empty-history-icon">📜</span>
+                <p class="empty-history-text">Здесь будет появляться история ваших запросов</p>
               </div>
             </div>
           </div>
@@ -104,34 +150,96 @@
             <div class="result-block year-block">
               <div class="block-header">
                 <h3 class="block-title">
-                  <span class="block-icon">🎯</span>
-                  Дух года
+                  {{ result.guardian }}
                 </h3>
                 <div class="block-subtitle">
-                  Год {{ result.year }} • Начало: {{ result.yearStartDateFormatted }}
+                  Год {{ result.year }} • Начало: {{ result.yearStartDateFormatted }} • Конец: {{ result.yearEndDateFormatted }}
                 </div>
               </div>
               <div class="block-content">
                 <div class="year-grid">
-                  <div class="year-item animal-item">
+                  <!-- Животное -->
+                  <div 
+                    class="year-item animal-item" 
+                    @click="toggleDescription('animal')"
+                    :class="{ 'expanded': expandedDescription === 'animal' }"
+                  >
                     <div class="item-label">Животное-покровитель</div>
-                    <div class="item-value shaman-animal">{{ result.animal }}</div>
-                    <div class="item-icon">🐾</div>
+                    <div class="item-value">{{ result.animal }}</div>
+                    <div class="item-icon">{{ getAnimalIcon(result.animal) }}</div>
+                    
+                    <!-- Описание животного -->
+                    <div v-if="expandedDescription === 'animal'" class="item-description">
+                      <div class="description-content">
+                        {{ animalDescription?.fullDescription || animalDescription?.description }}
+                      </div>
+                      <button @click.stop="expandedDescription = null" class="close-description-btn">
+                        ✕
+                      </button>
+                    </div>
                   </div>
-                  <div class="year-item character-item">
-                    <div class="item-label">Характер года</div>
-                    <div class="item-value">{{ result.character }}</div>
-                    <div class="item-icon">🌀</div>
-                  </div>
-                  <div class="year-item element-item">
+                  
+                  <!-- Стихия -->
+                  <div 
+                    class="year-item element-item" 
+                    @click="toggleDescription('element')"
+                    :class="{ 'expanded': expandedDescription === 'element' }"
+                  > 
                     <div class="item-label">Стихия</div>
                     <div class="item-value">{{ result.element }}</div>
                     <div class="item-icon">{{ getElementIcon(result.element) }}</div>
+                    
+                    <!-- Описание стихии -->
+                    <div v-if="expandedDescription === 'element'" class="item-description">
+                      <div class="description-content">
+                        {{ elementDescription?.fullDescription || elementDescription?.description }}
+                      </div>
+                      <button @click.stop="expandedDescription = null" class="close-description-btn">
+                        ✕
+                      </button>
+                    </div>
                   </div>
-                  <div class="year-item mengi-item">
+
+                  <!-- Характер года -->
+                  <div 
+                    class="year-item character-item" 
+                    @click="toggleDescription('character')"
+                    :class="{ 'expanded': expandedDescription === 'character' }"
+                  >
+                    <div class="item-label">Характер года</div>
+                    <div class="item-value">{{ result.character }}</div>
+                    <div class="item-icon">🌀</div>
+                    
+                    <!-- Описание характера -->
+                    <div v-if="expandedDescription === 'character'" class="item-description">
+                      <div class="description-content">
+                        {{ characterDescription?.fullDescription || characterDescription?.description }}
+                      </div>
+                      <button @click.stop="expandedDescription = null" class="close-description-btn">
+                        ✕
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <!-- Менги -->
+                  <div 
+                    class="year-item mengi-item" 
+                    @click="toggleDescription('mengi')"
+                    :class="{ 'expanded': expandedDescription === 'mengi' }"
+                  >
                     <div class="item-label">Цвет менги</div>
                     <div class="item-value">{{ result.mengi }}</div>
                     <div class="item-icon">🌈</div>
+                    
+                    <!-- Описание менги -->
+                    <div v-if="expandedDescription === 'mengi'" class="item-description">
+                      <div class="description-content">
+                        {{ mengiDescription?.fullDescription || mengiDescription?.description }}
+                      </div>
+                      <button @click.stop="expandedDescription = null" class="close-description-btn">
+                        ✕
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,7 +281,7 @@
                   <div class="period-special">
                     <div v-if="result.isPeakPeriod" class="special-item peak">
                       <span class="special-icon">⚡</span>
-                      <span class="special-text">Пик силы (21-35 день)</span>
+                      <span class="special-text">Пик силы</span>
                     </div>
                     <div v-if="result.isOverlapPeriod" class="special-item overlap">
                       <span class="special-icon">🔄</span>
@@ -215,47 +323,86 @@
       </div>
     </main>
 
+
     <!-- Подвал -->
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-text">
           <span class="footer-icon">🌿</span>
-          Шаманский гороскоп • Мудрость предков • 2024
+          Шаманский гороскоп • Мудрость предков • 2026
         </div>
         <div class="footer-note">
           Сила животных, стихий и луны направляет наш путь
         </div>
       </div>
     </footer>
+    <InstallPrompt />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { calculationService } from './services/calculationService.js'
+import InstallPrompt from './components/InstallPrompt.vue'
 
-const testDate = ref('1990-06-15')
+const now = new Date()
+const testDate = ref(now.toISOString().split('T')[0])
 const result = ref(null)
 const error = ref('')
+const history = ref([])
+const expandedDescription = ref(null)
+const currentYearInfo = ref(null)
 
-const testExamples = [
-  { label: '15.06.1990', date: '1990-06-15' },
-  { label: '01.01.2000', date: '2000-01-01' },
-  { label: '08.02.1940', date: '1940-02-08' },
-  { label: '27.01.1941', date: '1941-01-27' },
-  { label: '31.12.1999', date: '1999-12-31' }
-]
+// Вычисляемые свойства для описаний
+const animalDescription = computed(() => {
+  if (!result.value) return null
+  return calculationService.getAnimalDescription(result.value.animal)
+})
+
+const characterDescription = computed(() => {
+  if (!result.value) return null
+  return calculationService.getCharacterDescription(result.value.character)
+})
+
+const elementDescription = computed(() => {
+  if (!result.value) return null
+  return calculationService.getElementDescription(result.value.element)
+})
+
+const mengiDescription = computed(() => {
+  if (!result.value) return null
+  return calculationService.getMengiDescription(result.value.mengi)
+})
 
 // Иконки для стихий
 const getElementIcon = (element) => {
   const icons = {
     'дерево': '🌳',
     'огонь': '🔥',
-    'земля': '🌍',
+    'земля': '⛰️',
     'железо': '⚙️',
     'вода': '💧'
   }
   return icons[element.toLowerCase()] || '🌀'
+}
+
+// Иконки для стихий
+const getAnimalIcon = (animal) => {
+  const icons = {
+    'обезьяна' : '🐒',
+    'петух'  : '🐓',
+    'собака' : '🐕',
+    'кабан' : '🐖',
+    'мышь' : '🐀',
+    'бык' : '🐂',
+    'тигр' : '🐅',
+    'заяц' : '🐇',
+    'дракон' : '🐲',
+    'змея' : '🐍',
+    'лошадь' : '🐎',
+    'коза' : '🐐'
+  }
+  return icons[animal.toLowerCase()] || '🐾'
 }
 
 // Расчет ширины прогресс-бара
@@ -263,23 +410,60 @@ const getProgressWidth = (current, total) => {
   return Math.min(100, (current / total) * 100)
 }
 
+// Основной расчет
 const calculate = () => {
   try {
     result.value = calculationService.calculateAll(testDate.value)
     error.value = ''
+    
+    // Сохраняем в историю
+    calculationService.saveToHistory(result.value)
+    loadHistory()
+    
+    // Сбрасываем открытое описание
+    expandedDescription.value = null
   } catch (err) {
     error.value = err.message
     result.value = null
   }
 }
 
-const runExample = (date) => {
+// Переключение описаний
+const toggleDescription = (type) => {
+  if (expandedDescription.value === type) {
+    expandedDescription.value = null
+  } else {
+    expandedDescription.value = type
+  }
+}
+
+// Работа с историей
+const loadHistory = () => {
+  history.value = calculationService.getHistory()
+}
+
+const loadFromHistory = (date) => {
   testDate.value = date
   calculate()
 }
 
+const removeFromHistory = (id) => {
+  calculationService.removeFromHistory(id)
+  loadHistory()
+}
+
+const clearHistory = () => {
+  if (confirm('Очистить всю историю запросов?')) {
+    calculationService.clearHistory()
+    history.value = []
+  }
+}
+
+// Инициализация
 onMounted(() => {
   calculate()
+  loadHistory()
+  currentYearInfo.value = calculationService.getCurrentYearInfo()
 })
 </script>
 
@@ -399,6 +583,58 @@ body {
   color: #c7b198;
   margin-bottom: 15px;
   font-style: italic;
+}
+
+/* Информация о текущем годе */
+.current-year-info {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.current-year-card {
+  padding: 15px 20px;
+  background: linear-gradient(135deg, rgba(167, 123, 92, 0.2), rgba(199, 177, 152, 0.1));
+  border-radius: 12px;
+  border: 1px solid rgba(167, 123, 92, 0.3);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.current-year-title {
+  text-align: center;
+  gap: 10px;
+  color: #f0c674;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.current-year-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+  justify-content: center;
+}
+
+.current-year-item {
+  padding: 5px 12px;
+  background: rgba(31, 41, 55, 0.7);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #f0e6d2;
+}
+
+.current-year-end {
+  color: #9ca3af;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.days-left {
+  color: #c7b198;
+  font-style: italic;
+  font-size: 0.8rem;
 }
 
 .header-decoration {
@@ -562,41 +798,156 @@ body {
   opacity: 0.8;
 }
 
-/* ===== Быстрый выбор ===== */
-.quick-choices {
-  margin-top: 20px;
+/* ===== История запросов ===== */
+.history-section {
+  margin-top: 25px;
+  padding: 20px;
+  background: rgba(42, 52, 65, 0.5);
+  border-radius: 15px;
+  border: 1px solid rgba(167, 123, 92, 0.2);
 }
 
-.quick-label {
+.history-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: #c7b198;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
+  gap: 12px;
+  margin-bottom: 15px;
 }
 
-.quick-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.history-icon {
+  font-size: 1.5rem;
 }
 
-.quick-choice {
-  padding: 10px 16px;
-  background: rgba(42, 52, 65, 0.8);
-  border: 1px solid #4b5563;
-  border-radius: 8px;
-  color: #e5e7eb;
-  font-size: 0.9rem;
+.history-title {
+  font-size: 1.1rem;
+  color: #f0e6d2;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.clear-history-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.2s;
 }
 
-.quick-choice:hover {
-  background: rgba(167, 123, 92, 0.2);
+.clear-history-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.history-items {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.history-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-items::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 3px;
+}
+
+.history-items::-webkit-scrollbar-thumb {
+  background: #a27b5c;
+  border-radius: 3px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  background: rgba(31, 41, 55, 0.7);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.history-item:hover {
+  background: rgba(42, 52, 65, 0.9);
   border-color: #a27b5c;
-  transform: translateY(-2px);
+  transform: translateX(5px);
+}
+
+.history-date {
+  font-weight: 500;
+  color: #f0e6d2;
+  min-width: 100px;
+}
+
+.history-details {
+  flex-grow: 1;
+  display: flex;
+  gap: 15px;
+}
+
+.history-animal {
+  color: #c7b198;
+  font-weight: 600;
+}
+
+.history-period {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.history-remove {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.history-remove:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.empty-history {
+  margin-top: 25px;
+  padding: 20px;
+  background: rgba(42, 52, 65, 0.3);
+  border-radius: 15px;
+  border: 1px dashed rgba(167, 123, 92, 0.3);
+  text-align: center;
+}
+
+.empty-history-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.empty-history-icon {
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+.empty-history-text {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 /* ===== Результаты ===== */
@@ -654,11 +1005,17 @@ body {
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .year-item:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.year-item.expanded {
+  z-index: 100;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
 .animal-item { 
@@ -732,6 +1089,93 @@ body {
 .year-item:hover .item-icon {
   opacity: 0.2;
   transform: rotate(0deg) scale(1.1);
+}
+
+/* ===== РАСКРЫВАЮЩИЕСЯ ОПИСАНИЯ (анимация из второго файла) ===== */
+.item-description {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 46, 0.95);
+  border-radius: 15px;
+  padding: 20px;
+  z-index: 10;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgba(167, 123, 92, 0.5);
+  animation: slideIn 0.3s ease;
+  
+  /* Стили скроллбара как в истории запросов */
+  scrollbar-width: thin; /* Для Firefox */
+  scrollbar-color: #a27b5c rgba(31, 41, 55, 0.5); /* Для Firefox */
+}
+
+/* Стилизация скроллбара для Webkit браузеров (Chrome, Safari, Edge) */
+.item-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.item-description::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 3px;
+  margin: 5px 0;
+}
+
+.item-description::-webkit-scrollbar-thumb {
+  background: #a27b5c;
+  border-radius: 3px;
+}
+
+.item-description::-webkit-scrollbar-thumb:hover {
+  background: #c7b198;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.description-content {
+  flex: 1;
+  color: #f0e6d2;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: left;
+  padding-right: 5px; /* Уменьшил отступ для скроллбара */
+}
+
+.close-description-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(167, 123, 92, 0.3);
+  border: 1px solid rgba(167, 123, 92, 0.5);
+  color: #f0e6d2;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.2s;
+  z-index: 11; /* Чтобы кнопка была поверх скроллбара */
+}
+
+.close-description-btn:hover {
+  background: rgba(167, 123, 92, 0.5);
+  transform: scale(1.1);
 }
 
 /* ===== Период ===== */
@@ -908,30 +1352,62 @@ body {
   text-align: center;
 }
 
-/* ===== Исправление перекрытия на маленьких экранах ===== */
+.footer-text {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ===== Адаптивность ===== */
 @media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .logo {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
   .year-grid {
     grid-template-columns: 1fr;
-    gap: 15px;
   }
   
-  .year-item {
-    min-height: 140px;
-    padding: 20px 15px;
+  .info-content {
+    flex-direction: column;
+    text-align: center;
   }
   
-  .item-value {
-    font-size: 1.3rem;
+  .header-decoration {
+    flex-wrap: wrap;
   }
   
-  .shaman-animal {
-    font-size: 1.5rem;
+  .current-year-details {
+    flex-direction: column;
+    align-items: center;
   }
   
-  .item-icon {
-    font-size: 2.8rem;
-    bottom: -10px;
-    right: -10px;
+  .current-year-item {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .history-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .history-date {
+    min-width: auto;
+  }
+  
+  .history-details {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -969,6 +1445,16 @@ body {
   .year-item {
     min-height: 130px;
     padding: 15px 10px;
+  }
+  
+  .item-description {
+    position: fixed;
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    transform: translateY(-50%);
+    max-height: 80vh;
+    overflow-y: auto;
   }
 }
 </style>

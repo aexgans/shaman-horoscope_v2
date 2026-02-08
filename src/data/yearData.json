@@ -6,7 +6,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 0,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "1941-01-26"
     },
     {
       "year": 1941,
@@ -14,7 +15,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 1,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "1942-02-14"
     },
     {
       "year": 1942,
@@ -22,7 +24,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 2,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "1943-02-04"
     },
     {
       "year": 1943,
@@ -30,7 +33,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 3,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "1944-02-24"
     },
     {
       "year": 1944,
@@ -38,7 +42,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 4,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "1945-02-11"
     },
     {
       "year": 1945,
@@ -46,7 +51,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 5,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "1946-02-01"
     },
     {
       "year": 1946,
@@ -54,7 +60,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 6,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "1947-01-21"
     },
     {
       "year": 1947,
@@ -62,7 +69,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 7,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "1948-02-09"
     },
     {
       "year": 1948,
@@ -70,7 +78,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 8,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "1949-01-28"
     },
     {
       "year": 1949,
@@ -78,7 +87,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 9,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "1950-02-16"
     },
     {
       "year": 1950,
@@ -86,7 +96,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 0,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "1951-02-05"
     },
     {
       "year": 1951,
@@ -94,7 +105,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 1,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "1952-01-26"
     },
     {
       "year": 1952,
@@ -102,7 +114,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 2,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "1953-02-13"
     },
     {
       "year": 1953,
@@ -110,7 +123,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 3,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "1954-02-02"
     },
     {
       "year": 1954,
@@ -118,7 +132,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 4,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "1955-01-23"
     },
     {
       "year": 1955,
@@ -126,7 +141,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 5,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "1956-02-11"
     },
     {
       "year": 1956,
@@ -134,7 +150,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 6,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "1957-01-30"
     },
     {
       "year": 1957,
@@ -142,7 +159,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 7,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "1958-02-17"
     },
     {
       "year": 1958,
@@ -150,7 +168,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 8,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "1959-02-06"
     },
     {
       "year": 1959,
@@ -158,7 +177,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 9,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "1960-01-27"
     },
     {
       "year": 1960,
@@ -166,7 +186,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 0,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "1961-02-14"
     },
     {
       "year": 1961,
@@ -174,7 +195,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 1,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "1962-02-04"
     },
     {
       "year": 1962,
@@ -182,7 +204,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 2,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "1963-01-24"
     },
     {
       "year": 1963,
@@ -190,7 +213,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 3,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "1964-02-12"
     },
     {
       "year": 1964,
@@ -198,7 +222,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 4,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "1965-01-31"
     },
     {
       "year": 1965,
@@ -206,7 +231,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 5,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "1966-01-20"
     },
     {
       "year": 1966,
@@ -214,7 +240,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 6,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "1967-01-08"
     },
     {
       "year": 1967,
@@ -222,7 +249,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 7,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "1968-01-28"
     },
     {
       "year": 1968,
@@ -230,7 +258,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 8,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "1969-02-16"
     },
     {
       "year": 1969,
@@ -238,7 +267,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 9,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "1970-02-05"
     },
     {
       "year": 1970,
@@ -246,7 +276,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 0,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "1971-01-26"
     },
     {
       "year": 1971,
@@ -254,7 +285,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 1,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "1972-02-14"
     },
     {
       "year": 1972,
@@ -262,7 +294,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 2,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "1973-02-02"
     },
     {
       "year": 1973,
@@ -270,7 +303,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 3,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "1974-01-22"
     },
     {
       "year": 1974,
@@ -278,7 +312,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 4,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "1975-02-10"
     },
     {
       "year": 1975,
@@ -286,7 +321,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 5,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "1976-01-30"
     },
     {
       "year": 1976,
@@ -294,7 +330,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 6,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "1977-02-17"
     },
     {
       "year": 1977,
@@ -302,7 +339,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 7,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "1978-02-07"
     },
     {
       "year": 1978,
@@ -310,7 +348,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 8,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "1979-01-27"
     },
     {
       "year": 1979,
@@ -318,7 +357,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 9,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "1980-02-15"
     },
     {
       "year": 1980,
@@ -326,7 +366,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 0,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "1981-02-04"
     },
     {
       "year": 1981,
@@ -334,7 +375,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 1,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "1982-02-24"
     },
     {
       "year": 1982,
@@ -342,7 +384,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 2,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "1983-02-12"
     },
     {
       "year": 1983,
@@ -350,7 +393,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 3,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "1984-02-01"
     },
     {
       "year": 1984,
@@ -358,7 +402,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 4,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "1985-01-20"
     },
     {
       "year": 1985,
@@ -366,7 +411,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 5,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "1986-02-08"
     },
     {
       "year": 1986,
@@ -374,7 +420,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 6,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "1987-01-28"
     },
     {
       "year": 1987,
@@ -382,7 +429,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 7,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "1988-02-16"
     },
     {
       "year": 1988,
@@ -390,7 +438,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 8,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "1989-02-05"
     },
     {
       "year": 1989,
@@ -398,7 +447,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 9,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "1990-01-24"
     },
     {
       "year": 1990,
@@ -406,7 +456,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 0,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "1991-02-13"
     },
     {
       "year": 1991,
@@ -414,7 +465,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 1,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "1992-02-02"
     },
     {
       "year": 1992,
@@ -422,7 +474,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 2,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "1993-01-21"
     },
     {
       "year": 1993,
@@ -430,7 +483,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 3,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "1994-02-09"
     },
     {
       "year": 1994,
@@ -438,7 +492,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 4,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "1995-01-30"
     },
     {
       "year": 1995,
@@ -446,7 +501,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 5,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "1996-01-19"
     },
     {
       "year": 1996,
@@ -454,7 +510,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 6,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "1997-02-07"
     },
     {
       "year": 1997,
@@ -462,7 +519,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 7,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "1998-01-20"
     },
     {
       "year": 1998,
@@ -470,7 +528,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 8,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "1999-02-15"
     },
     {
       "year": 1999,
@@ -478,7 +537,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 9,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2000-02-04"
     },
     {
       "year": 2000,
@@ -486,7 +546,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 0,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "2001-01-23"
     },
     {
       "year": 2001,
@@ -494,7 +555,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 1,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "2002-02-11"
     },
     {
       "year": 2002,
@@ -502,7 +564,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 2,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "2003-01-31"
     },
     {
       "year": 2003,
@@ -510,7 +573,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 3,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "2004-01-21"
     },
     {
       "year": 2004,
@@ -518,7 +582,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 4,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "2005-02-08"
     },
     {
       "year": 2005,
@@ -526,7 +591,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 5,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "2006-01-28"
     },
     {
       "year": 2006,
@@ -534,7 +600,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 6,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "2007-02-16"
     },
     {
       "year": 2007,
@@ -542,7 +609,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 7,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "2008-02-06"
     },
     {
       "year": 2008,
@@ -550,7 +618,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 8,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2009-01-25"
     },
     {
       "year": 2009,
@@ -558,7 +627,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 9,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "2010-02-13"
     },
     {
       "year": 2010,
@@ -566,7 +636,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 0,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "2011-02-02"
     },
     {
       "year": 2011,
@@ -574,7 +645,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 1,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "2012-02-21"
     },
     {
       "year": 2012,
@@ -582,7 +654,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 2,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "2013-02-09"
     },
     {
       "year": 2013,
@@ -590,7 +663,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 3,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "2014-01-30"
     },
     {
       "year": 2014,
@@ -598,7 +672,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 4,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "2015-01-19"
     },
     {
       "year": 2015,
@@ -606,7 +681,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 5,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "2016-02-07"
     },
     {
       "year": 2016,
@@ -614,7 +690,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 6,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "2017-01-27"
     },
     {
       "year": 2017,
@@ -622,7 +699,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 7,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2018-02-15"
     },
     {
       "year": 2018,
@@ -630,7 +708,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 8,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "2019-02-04"
     },
     {
       "year": 2019,
@@ -638,7 +717,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 9,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "2020-01-24"
     },
     {
       "year": 2020,
@@ -646,7 +726,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 0,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "2021-02-11"
     },
     {
       "year": 2021,
@@ -654,7 +735,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 1,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "2022-01-31"
     },
     {
       "year": 2022,
@@ -662,7 +744,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 2,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "2023-01-21"
     },
     {
       "year": 2023,
@@ -670,7 +753,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 3,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "2024-02-09"
     },
     {
       "year": 2024,
@@ -678,7 +762,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 4,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "2025-01-28"
     },
     {
       "year": 2025,
@@ -686,7 +771,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 5,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "2026-02-16"
     },
     {
       "year": 2026,
@@ -694,7 +780,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 6,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2027-02-05"
     },
     {
       "year": 2027,
@@ -702,7 +789,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 7,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "2028-01-25"
     },
     {
       "year": 2028,
@@ -710,7 +798,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 8,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "2029-02-12"
     },
     {
       "year": 2029,
@@ -718,7 +807,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 9,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "2030-02-02"
     },
     {
       "year": 2030,
@@ -726,7 +816,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 0,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "2031-01-22"
     },
     {
       "year": 2031,
@@ -734,7 +825,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 1,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "2032-02-10"
     },
     {
       "year": 2032,
@@ -742,7 +834,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 2,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "2033-01-30"
     },
     {
       "year": 2033,
@@ -750,7 +843,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 3,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "2034-02-18"
     },
     {
       "year": 2034,
@@ -758,7 +852,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 4,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "2035-02-07"
     },
     {
       "year": 2035,
@@ -766,7 +861,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 5,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2036-01-27"
     },
     {
       "year": 2036,
@@ -774,7 +870,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 6,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "2037-02-14"
     },
     {
       "year": 2037,
@@ -782,7 +879,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 7,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "2038-02-03"
     },
     {
       "year": 2038,
@@ -790,7 +888,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 8,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "2039-02-23"
     },
     {
       "year": 2039,
@@ -798,7 +897,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 9,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "2040-02-11"
     },
     {
       "year": 2040,
@@ -806,7 +906,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 0,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "2041-01-31"
     },
     {
       "year": 2041,
@@ -814,7 +915,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 1,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "2042-01-20"
     },
     {
       "year": 2042,
@@ -822,7 +924,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 2,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "2043-02-08"
     },
     {
       "year": 2043,
@@ -830,7 +933,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 3,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "2044-01-29"
     },
     {
       "year": 2044,
@@ -838,7 +942,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 4,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2045-02-16"
     },
     {
       "year": 2045,
@@ -846,7 +951,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 5,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "2046-02-05"
     },
     {
       "year": 2046,
@@ -854,7 +960,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 6,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "2047-01-25"
     },
     {
       "year": 2047,
@@ -862,7 +969,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 7,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "2048-02-13"
     },
     {
       "year": 2048,
@@ -870,7 +978,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 8,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "2049-02-01"
     },
     {
       "year": 2049,
@@ -878,7 +987,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 9,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "2050-02-20"
     },
     {
       "year": 2050,
@@ -886,7 +996,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 0,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "2051-02-10"
     },
     {
       "year": 2051,
@@ -894,7 +1005,8 @@
       "animalIndex": 11,
       "characterIndex": 11,
       "elementIndex": 1,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "2052-01-30"
     },
     {
       "year": 2052,
@@ -902,7 +1014,8 @@
       "animalIndex": 0,
       "characterIndex": 0,
       "elementIndex": 2,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "2053-01-19"
     },
     {
       "year": 2053,
@@ -910,7 +1023,8 @@
       "animalIndex": 1,
       "characterIndex": 1,
       "elementIndex": 3,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2054-02-06"
     },
     {
       "year": 2054,
@@ -918,7 +1032,8 @@
       "animalIndex": 2,
       "characterIndex": 2,
       "elementIndex": 4,
-      "mengiIndex": 2
+      "mengiIndex": 2,
+      "endDate": "2055-01-26"
     },
     {
       "year": 2055,
@@ -926,7 +1041,8 @@
       "animalIndex": 3,
       "characterIndex": 3,
       "elementIndex": 5,
-      "mengiIndex": 3
+      "mengiIndex": 3,
+      "endDate": "2056-02-14"
     },
     {
       "year": 2056,
@@ -934,7 +1050,8 @@
       "animalIndex": 4,
       "characterIndex": 4,
       "elementIndex": 6,
-      "mengiIndex": 4
+      "mengiIndex": 4,
+      "endDate": "2057-02-03"
     },
     {
       "year": 2057,
@@ -942,7 +1059,8 @@
       "animalIndex": 5,
       "characterIndex": 5,
       "elementIndex": 7,
-      "mengiIndex": 5
+      "mengiIndex": 5,
+      "endDate": "2058-01-23"
     },
     {
       "year": 2058,
@@ -950,7 +1068,8 @@
       "animalIndex": 6,
       "characterIndex": 6,
       "elementIndex": 8,
-      "mengiIndex": 6
+      "mengiIndex": 6,
+      "endDate": "2059-02-11"
     },
     {
       "year": 2059,
@@ -958,7 +1077,8 @@
       "animalIndex": 7,
       "characterIndex": 7,
       "elementIndex": 9,
-      "mengiIndex": 7
+      "mengiIndex": 7,
+      "endDate": "2060-02-01"
     },
     {
       "year": 2060,
@@ -966,7 +1086,8 @@
       "animalIndex": 8,
       "characterIndex": 8,
       "elementIndex": 0,
-      "mengiIndex": 8
+      "mengiIndex": 8,
+      "endDate": "2061-01-20"
     },
     {
       "year": 2061,
@@ -974,7 +1095,8 @@
       "animalIndex": 9,
       "characterIndex": 9,
       "elementIndex": 1,
-      "mengiIndex": 0
+      "mengiIndex": 0,
+      "endDate": "2062-02-08"
     },
     {
       "year": 2062,
@@ -982,7 +1104,8 @@
       "animalIndex": 10,
       "characterIndex": 10,
       "elementIndex": 2,
-      "mengiIndex": 1
+      "mengiIndex": 1,
+      "endDate": "2062-12-31"
     }
   ]
 }
