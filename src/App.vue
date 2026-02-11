@@ -1449,9 +1449,6 @@ body {
   
   .item-description {
     position: fixed;
-    top: 50%;
-    left: 10px;
-    right: 10px;
     transform: translateY(-50%);
     max-height: 80vh;
     overflow-y: auto;
