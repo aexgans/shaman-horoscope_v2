@@ -1079,8 +1079,8 @@ body {
   font-size: 3.5rem;
   opacity: 0.15;
   position: absolute;
-  bottom: -15px;
-  right: -15px;
+  bottom: -10px;
+  right: -10px;
   z-index: 1;
   transform: rotate(15deg);
   transition: all 0.3s ease;
@@ -1091,7 +1091,7 @@ body {
   transform: rotate(0deg) scale(1.1);
 }
 
-/* ===== РАСКРЫВАЮЩИЕСЯ ОПИСАНИЯ (анимация из второго файла) ===== */
+/* ===== РАСКРЫВАЮЩИЕСЯ ОПИСАНИЯ (анимация из второго файла) =====*/
 .item-description {
   position: absolute;
   top: 0;
@@ -1449,9 +1449,6 @@ body {
   
   .item-description {
     position: fixed;
-    transform: translateY(-50%);
-    max-height: 80vh;
-    overflow-y: auto;
   }
 }
 </style>
