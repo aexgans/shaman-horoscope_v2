@@ -34,12 +34,14 @@ onMounted(() => {
         showPrompt.value = true
       }
     }, 5000)
+  showPrompt.value = true
   })
 
   // Скрываем промпт если приложение уже установлено
   if (window.matchMedia('(display-mode: standalone)').matches) {
     showPrompt.value = false
   }
+  showPrompt.value = true
 })
 
 const installApp = async () => {
