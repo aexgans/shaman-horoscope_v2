@@ -610,8 +610,7 @@ body {
 }
 
 .current-year-details {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 8px;
@@ -1023,18 +1022,6 @@ body {
   }
 }
 
-/* Экстремально узкие экраны (если нужно переключиться на 1 колонку – раскомментировать) */
-/*
-@media (max-width: 400px) {
-  /* Уменьшаем все шрифты на 50% для очень узких экранов */
-  .app, .app * {
-    font-size: 50% !important;
-  }
-  .year-grid {
-    grid-template-columns: 1fr;
-  }
-}
-*/
 
 .year-item {
   padding: 25px 20px;
@@ -1420,6 +1407,8 @@ body {
   }
   
   .current-year-details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     flex-direction: column;
     align-items: center;
   }
@@ -1446,14 +1435,17 @@ body {
 }
 
 @media (max-width: 480px) {
-  /* Уменьшаем базовый размер шрифта на 50% для всех текстовых элементов на очень узких экранах */
-  :root {
-    font-size: 50%;
-  }
   .app {
     padding: 10px;
   }
   
+  .current-year-details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    flex-direction: column;
+    align-items: center;
+  }
+
   .header {
     padding: 20px 15px;
   }
@@ -1486,7 +1478,11 @@ body {
   }
   
   .item-description {
-    position: flex;
+    position: fixed;
   }
+  .current-year-item {
+    font-size: 0.7rem;
+    
+}
 }
 </style>
