@@ -77,36 +77,28 @@
               <span class="button-icon">🔮</span>
               <span class="button-text">Раскрыть тайны судьбы</span>
               <span class="button-arrow">→</span>
-                /* Reduce sizes and spacing so everything fits without scrolling */
-                .item-value {
-                  font-size: 1.05rem;
-                  padding: 0 4px;
-                }
-
-                .shaman-animal {
-                  font-size: 1.05rem;
-                }
-
-                .item-icon {
-                  font-size: 2rem;
-                  opacity: 0.1;
-                }
-
-                .year-item {
-                  min-height: 110px;
-                  padding: 12px 8px;
-                }
-
-                /* Keep the description overlay confined to its parent year-item */
-                .item-description {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  right: 0;
-                  bottom: 0;
-                  border-radius: 12px;
-                  padding: 12px;
-                }
+            </button>
+            
+            <!-- История запросов -->
+            <div class="history-section" v-if="history.length > 0">
+              <div class="history-header">
+                <span class="history-icon">📜</span>
+                <h3 class="history-title">История запросов</h3>
+                <button 
+                  @click="clearHistory" 
+                  class="clear-history-btn" 
+                  title="Очистить историю"
+                >
+                  🗑️
+                </button>
+              </div>
+              
+              <div class="history-items">
+                <div 
+                  v-for="item in history" 
+                  :key="item.id"
+                  class="history-item"
+                  @click="loadFromHistory(item.birthDate)"
                 >
                   <div class="history-date">{{ item.formattedDate }}</div>
                   <div class="history-details">
@@ -1457,33 +1449,6 @@ body {
   
   .item-description {
     position: fixed;
-  }
-  .year-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  /* Current year items: 4 in a row */
-  .current-year-details {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 6px;
-    justify-content: space-between;
-  }
-
-  .current-year-item {
-    width: 23%;
-    text-align: center;
-    padding: 6px 6px;
-    font-size: 0.78rem;
-  }
-
-  .description-content {
-    font-size: 0.92rem;
-  }
-
-  .main-content {
-    gap: 16px;
   }
 }
 </style>
