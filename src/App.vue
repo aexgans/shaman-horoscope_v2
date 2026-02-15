@@ -610,7 +610,8 @@ body {
 }
 
 .current-year-details {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 8px;
@@ -990,9 +991,46 @@ body {
 /* ===== Сетка характеристик года ===== */
 .year-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
+
+/* Планшеты и маленькие десктопы – 2 колонки */
+@media (max-width: 1024px) {
+  .year-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Мобильные устройства – 2 колонки с адаптивными размерами */
+@media (max-width: 768px) {
+  .year-grid {
+    gap: 12px;
+  }
+  
+  .year-item {
+    padding: 18px 10px;
+    min-height: 130px;
+  }
+  
+  .item-value {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    padding: 0 5px;
+  }
+  
+  .item-icon {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+}
+
+/* Экстремально узкие экраны (если нужно переключиться на 1 колонку – раскомментировать) */
+/*
+@media (max-width: 400px) {
+  .year-grid {
+    grid-template-columns: 1fr;
+  }
+}
+*/
 
 .year-item {
   padding: 25px 20px;
@@ -1091,7 +1129,7 @@ body {
   transform: rotate(0deg) scale(1.1);
 }
 
-/* ===== РАСКРЫВАЮЩИЕСЯ ОПИСАНИЯ (анимация из второго файла) =====*/
+/* ===== РАСКРЫВАЮЩИЕСЯ ОПИСАНИЯ =====*/
 .item-description {
   position: absolute;
   top: 0;
@@ -1150,7 +1188,7 @@ body {
   font-size: 0.95rem;
   line-height: 1.6;
   text-align: left;
-  padding-right: 5px; /* Уменьшил отступ для скроллбара */
+  padding-right: 5px;
 }
 
 .close-description-btn {
@@ -1170,7 +1208,7 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   transition: all 0.2s;
-  z-index: 11; /* Чтобы кнопка была поверх скроллбара */
+  z-index: 11;
 }
 
 .close-description-btn:hover {
@@ -1361,20 +1399,12 @@ body {
   gap: 8px;
 }
 
-/* ===== Адаптивность ===== */
+/* ===== Адаптивность (общая) ===== */
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
   }
   
-  .logo {
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .year-grid {
-    grid-template-columns: 1fr;
-  }
   
   .info-content {
     flex-direction: column;
