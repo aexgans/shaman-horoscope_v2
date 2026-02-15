@@ -185,4 +185,34 @@ const dismissPrompt = () => {
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .prompt-content {
+    padding: 12px 10px; /* Уменьшены внутренние отступы */
+  }
+  .prompt-icon {
+    font-size: 2rem; /* Иконка чуть меньше */
+  }
+  .prompt-text h3 {
+    font-size: 1rem; /* Уменьшен заголовок */
+  }
+  .prompt-text p {
+    font-size: 0.8rem; /* Уменьшен текст */
+  }
+  .prompt-actions {
+    flex-direction: column; /* Кнопки друг под другом */
+    gap: 8px; /* Расстояние между кнопками */
+  }
+  .install-btn,
+  .dismiss-btn {
+    width: 100%; /* Кнопки на всю ширину */
+    padding: 12px 10px; /* Увеличенная область касания */
+    font-size: 0.9rem;
+  }
+  .close-btn {
+    font-size: 1.2rem; /* Крестик меньше */
+    width: 24px;
+    height: 24px;
+  }
+}
 </style>
