@@ -1026,6 +1026,10 @@ body {
 /* Экстремально узкие экраны (если нужно переключиться на 1 колонку – раскомментировать) */
 /*
 @media (max-width: 400px) {
+  /* Уменьшаем все шрифты на 50% для очень узких экранов */
+  .app, .app * {
+    font-size: 50% !important;
+  }
   .year-grid {
     grid-template-columns: 1fr;
   }
@@ -1399,5 +1403,90 @@ body {
   gap: 8px;
 }
 
+/* ===== Адаптивность (общая) ===== */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  
+  .info-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .header-decoration {
+    flex-wrap: wrap;
+  }
+  
+  .current-year-details {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .current-year-item {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .history-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .history-date {
+    min-width: auto;
+  }
+  
+  .history-details {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
 
+@media (max-width: 480px) {
+  /* Уменьшаем базовый размер шрифта на 50% для всех текстовых элементов на очень узких экранах */
+  :root {
+    font-size: 50%;
+  }
+  .app {
+    padding: 10px;
+  }
+  
+  .header {
+    padding: 20px 15px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .item-value {
+    font-size: 1.2rem;
+    padding: 0 5px;
+  }
+  
+  .shaman-animal {
+    font-size: 1.3rem;
+  }
+  
+  .item-icon {
+    font-size: 2.2rem;
+    opacity: 0.1;
+  }
+  
+  .year-item {
+    min-height: 130px;
+    padding: 15px 10px;
+  }
+  
+  .item-description {
+    position: flex;
+  }
+}
 </style>
