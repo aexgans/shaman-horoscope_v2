@@ -77,28 +77,36 @@
               <span class="button-icon">🔮</span>
               <span class="button-text">Раскрыть тайны судьбы</span>
               <span class="button-arrow">→</span>
-            </button>
-            
-            <!-- История запросов -->
-            <div class="history-section" v-if="history.length > 0">
-              <div class="history-header">
-                <span class="history-icon">📜</span>
-                <h3 class="history-title">История запросов</h3>
-                <button 
-                  @click="clearHistory" 
-                  class="clear-history-btn" 
-                  title="Очистить историю"
-                >
-                  🗑️
-                </button>
-              </div>
-              
-              <div class="history-items">
-                <div 
-                  v-for="item in history" 
-                  :key="item.id"
-                  class="history-item"
-                  @click="loadFromHistory(item.birthDate)"
+                /* Reduce sizes and spacing so everything fits without scrolling */
+                .item-value {
+                  font-size: 1.05rem;
+                  padding: 0 4px;
+                }
+
+                .shaman-animal {
+                  font-size: 1.05rem;
+                }
+
+                .item-icon {
+                  font-size: 2rem;
+                  opacity: 0.1;
+                }
+
+                .year-item {
+                  min-height: 110px;
+                  padding: 12px 8px;
+                }
+
+                /* Keep the description overlay confined to its parent year-item */
+                .item-description {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  border-radius: 12px;
+                  padding: 12px;
+                }
                 >
                   <div class="history-date">{{ item.formattedDate }}</div>
                   <div class="history-details">
@@ -990,38 +998,9 @@ body {
 /* ===== Сетка характеристик года ===== */
 .year-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
-
-/* Планшеты и маленькие десктопы – 2 колонки */
-@media (max-width: 1024px) {
-  .year-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Мобильные устройства – 2 колонки с адаптивными размерами */
-@media (max-width: 768px) {
-  .year-grid {
-    gap: 12px;
-  }
-  
-  .year-item {
-    padding: 18px 10px;
-    min-height: 130px;
-  }
-  
-  .item-value {
-    font-size: clamp(1rem, 4vw, 1.3rem);
-    padding: 0 5px;
-  }
-  
-  .item-icon {
-    font-size: clamp(2rem, 8vw, 2.8rem);
-  }
-}
-
 
 .year-item {
   padding: 25px 20px;
@@ -1120,7 +1099,7 @@ body {
   transform: rotate(0deg) scale(1.1);
 }
 
-/* ===== РАСКРЫВАЮЩИЕСЯ ОПИСАНИЯ =====*/
+/* ===== РАСКРЫВАЮЩИЕСЯ ОПИСАНИЯ (анимация из второго файла) =====*/
 .item-description {
   position: absolute;
   top: 0;
@@ -1179,7 +1158,7 @@ body {
   font-size: 0.95rem;
   line-height: 1.6;
   text-align: left;
-  padding-right: 5px;
+  padding-right: 5px; /* Уменьшил отступ для скроллбара */
 }
 
 .close-description-btn {
@@ -1199,7 +1178,7 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   transition: all 0.2s;
-  z-index: 11;
+  z-index: 11; /* Чтобы кнопка была поверх скроллбара */
 }
 
 .close-description-btn:hover {
@@ -1390,12 +1369,20 @@ body {
   gap: 8px;
 }
 
-/* ===== Адаптивность (общая) ===== */
+/* ===== Адаптивность ===== */
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
   }
   
+  .logo {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .year-grid {
+    grid-template-columns: 1fr;
+  }
   
   .info-content {
     flex-direction: column;
@@ -1407,8 +1394,6 @@ body {
   }
   
   .current-year-details {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
     flex-direction: column;
     align-items: center;
   }
@@ -1439,13 +1424,6 @@ body {
     padding: 10px;
   }
   
-  .current-year-details {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    flex-direction: column;
-    align-items: center;
-  }
-
   .header {
     padding: 20px 15px;
   }
@@ -1480,9 +1458,32 @@ body {
   .item-description {
     position: fixed;
   }
+  .year-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* Current year items: 4 in a row */
+  .current-year-details {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 6px;
+    justify-content: space-between;
+  }
+
   .current-year-item {
-    font-size: 0.7rem;
-    
-}
+    width: 23%;
+    text-align: center;
+    padding: 6px 6px;
+    font-size: 0.78rem;
+  }
+
+  .description-content {
+    font-size: 0.92rem;
+  }
+
+  .main-content {
+    gap: 16px;
+  }
 }
 </style>
