@@ -221,22 +221,26 @@ class CalculationService {
     const cleanDate = birthDateStr.replace(/\./g, '')
     
     // Сумма всех цифр даты
-    const dateSum = this.sumDigits(cleanDate)
-    
-    // Сумма цифр полученного числа
-    const finalSum = this.sumDigits(dateSum.toString())
-    
-    // Определяем хранителя по менги
-    const guardian = this.getGuardianByMengi(mengi, finalSum)
-    
+    const dateSum = this.sumDigits(cleanDate);
+    const finalSum = this.digitalRoot(dateSum); // теперь всегда однозначное
+    const guardian = this.getGuardianByMengi(mengi, finalSum);
+
     return guardian
-  }
+      }
+  
 
   sumDigits(str) {
     return str.split('').reduce((sum, char) => {
       const num = parseInt(char)
       return isNaN(num) ? sum : sum + num
     }, 0)
+  }
+
+  digitalRoot(num) {
+    while (num >= 10) {
+      num = this.sumDigits(num.toString());
+    }
+    return num;
   }
 
   getGuardianByMengi(mengi, starNumber) {
@@ -301,7 +305,7 @@ class CalculationService {
       4: 4, 9: 4,
       5: 5
     }
-    return mapping[starNumber] || 1
+    return mapping[starNumber] || 0
   }
 
   getUrsaMajorStarNumber(starNumber) {
@@ -315,7 +319,7 @@ class CalculationService {
       6: 6,
       7: 7
     }
-    return mapping[starNumber] || 1
+    return mapping[starNumber] || starNumber
   }
 
   // ==================== ФОРМАТИРОВАНИЕ ДАТ ====================
